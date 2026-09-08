@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="container result-container">
+
+        <h1>Prediction Result</h1>
+
+        <!-- Prediction Result -->
+        <div class="result-box">
+
+            <h2>Estimated Electric Range</h2>
+
+            <div class="range">
+                {{ prediction }} km
+            </div>
+
+            <p>
+                Your EV's predicted electric range is
+                <strong>{{ prediction }} km</strong>.
+            </p>
+
+        </div>
+
+
+        <!-- Vehicle Details -->
+        <div class="vehicle-details">
+
+            <h2>Vehicle Details</h2>
+
+            <p>
+                <strong>Model Year:</strong>
+                {{ model_year }}
+            </p>
+
+            <p>
+                <strong>Make:</strong>
+                {{ make }}
+            </p>
+
+            <p>
+                <strong>Vehicle Model:</strong>
+                {{ vehicle_model }}
+            </p>
+
+            <p>
+                <strong>EV Type:</strong>
+                {{ vehicle_type }}
+            </p>
+
+            <p>
+                <strong>CAFV Eligibility:</strong>
+                {{ cafv }}
+            </p>
+
+            <p>
+                <strong>Base MSRP:</strong>
+                ${{ base_msrp }}
+            </p>
+
+        </div>
+
+
+        <!-- Model Performance -->
+        <div class="performance-box">
+
+            <h2>Model Performance</h2>
+
+            <div class="performance-item">
+                <span>MAE</span>
+                <strong>0.61 km</strong>
+            </div>
+
+            <div class="performance-item">
+                <span>RMSE</span>
+                <strong>4.07 km</strong>
+            </div>
+
+            <div class="performance-item">
+                <span>R² Score</span>
+                <strong>0.9979</strong>
+            </div>
+
+        </div>
+
+
+        <!-- Back Button -->
+        <a href="/" class="back-button">
+            Predict Again
+        </a>
+
+    </div>
+
+</body>
+</html>

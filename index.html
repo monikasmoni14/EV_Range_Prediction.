@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EV Range Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Electric Vehicle Range Prediction</h1>
+
+        <p class="subtitle">
+            Enter your EV details to predict the electric range.
+        </p>
+
+        <form action="/predict" method="POST">
+
+            <!-- Model Year -->
+            <label>Model Year</label>
+
+            <input
+                type="number"
+                name="model_year"
+                placeholder="Example: 2022"
+                required
+            >
+
+
+            <!-- Make -->
+            <label>Make</label>
+
+            <select name="make" required>
+
+                <option value="">Select Make</option>
+
+                {% for make in makes %}
+                    <option value="{{ make }}">
+                        {{ make }}
+                    </option>
+                {% endfor %}
+
+            </select>
+
+
+            <!-- Vehicle Model -->
+            <label>Vehicle Model</label>
+
+            <select name="vehicle_model" required>
+
+                <option value="">Select Vehicle Model</option>
+
+                {% for model in models %}
+                    <option value="{{ model }}">
+                        {{ model }}
+                    </option>
+                {% endfor %}
+
+            </select>
+
+
+            <!-- Electric Vehicle Type -->
+            <label>Electric Vehicle Type</label>
+
+            <select name="vehicle_type" required>
+
+                <option value="">
+                    Select vehicle type
+                </option>
+
+                <option value="Battery Electric Vehicle (BEV)">
+                    Battery Electric Vehicle (BEV)
+                </option>
+
+                <option value="Plug-in Hybrid Electric Vehicle (PHEV)">
+                    Plug-in Hybrid Electric Vehicle (PHEV)
+                </option>
+
+            </select>
+
+
+            <!-- CAFV Eligibility -->
+            <label>CAFV Eligibility</label>
+
+            <select name="cafv" required>
+
+                <option value="">
+                    Select eligibility
+                </option>
+
+                <option value="Clean Alternative Fuel Vehicle Eligible">
+                    Clean Alternative Fuel Vehicle Eligible
+                </option>
+
+                <option value="Eligibility unknown as battery range has not been researched">
+                    Eligibility Unknown
+                </option>
+
+                <option value="Not eligible due to low battery range">
+                    Not Eligible
+                </option>
+
+            </select>
+
+
+            <!-- Base MSRP -->
+            <label>Base MSRP ($)</label>
+
+            <input
+                type="number"
+                name="base_msrp"
+                placeholder="Example: 45000"
+                min="0"
+                required
+            >
+
+
+            <!-- Predict Button -->
+            <button type="submit">
+                Predict Electric Range
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>
