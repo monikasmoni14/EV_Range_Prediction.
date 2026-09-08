@@ -1,30 +1,23 @@
 from flask import Flask, render_template, request
 import joblib
 import pandas as pd
+import json
 
 app = Flask(__name__)
 
 # Load trained ML model
 model = joblib.load("models/ev_range_model.pkl")
 
-# Load preprocessed dataset
-data = pd.read_csv(
-    "data/Electric_Vehicle_Population_Data_Preprocessed.csv"
-)
+# Load vehicle options
+with open("data/vehicle_options.json", "r", encoding="utf-8") as file:
+    vehicle_options = json.load(file)
 
-# Get unique Make and Model values
-makes = sorted(
-    data["Make"].dropna().unique().tolist()
-)
-
-models = sorted(
-    data["Model"].dropna().unique().tolist()
-)
+makes = vehicle_options["makes"]
+models = vehicle_options["models"]
 
 
 @app.route("/")
 def home():
-
     return render_template(
         "index.html",
         makes=makes,
@@ -35,7 +28,6 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
 
-    # Get values from HTML form
     model_year = int(request.form["model_year"])
     make = request.form["make"]
     vehicle_model = request.form["vehicle_model"]
@@ -43,7 +35,6 @@ def predict():
     cafv = request.form["cafv"]
     base_msrp = float(request.form["base_msrp"])
 
-    # Create input dataframe
     input_data = pd.DataFrame([{
         "Model Year": model_year,
         "Make": make,
@@ -53,12 +44,9 @@ def predict():
         "Base MSRP": base_msrp
     }])
 
-    # Predict electric range
     prediction = model.predict(input_data)[0]
-
     prediction = round(prediction, 2)
 
-    # Show result
     return render_template(
         "result.html",
         prediction=prediction,
