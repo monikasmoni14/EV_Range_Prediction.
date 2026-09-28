@@ -1,134 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EV Range Prediction</title>
+    <title>EV Range Predictor</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
 </head>
 
 <body>
 
-    <div class="container">
+    <!-- Background Decoration -->
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
 
-        <h1>Electric Vehicle Range Prediction</h1>
+    <div class="page">
 
-        <p class="subtitle">
-            Enter your EV details to predict the electric range.
-        </p>
+        <!-- Header -->
+        <header class="header">
 
-        <form action="/predict" method="POST">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span>EV<span class="logo-green">Range</span></span>
+            </div>
 
-            <!-- Model Year -->
-            <label>Model Year</label>
+            <div class="header-badge">
+                <span class="status-dot"></span>
+                ML Powered
+            </div>
 
-            <input
-                type="number"
-                name="model_year"
-                placeholder="Example: 2022"
-                required
-            >
-
-
-            <!-- Make -->
-            <label>Make</label>
-
-            <select name="make" required>
-
-                <option value="">Select Make</option>
-
-                {% for make in makes %}
-                    <option value="{{ make }}">
-                        {{ make }}
-                    </option>
-                {% endfor %}
-
-            </select>
+        </header>
 
 
-            <!-- Vehicle Model -->
-            <label>Vehicle Model</label>
+        <!-- Main Section -->
+        <main class="hero">
 
-            <select name="vehicle_model" required>
+            <!-- Left Content -->
+            <section class="hero-content">
 
-                <option value="">Select Vehicle Model</option>
+                <div class="small-title">
+                    ⚡ ELECTRIC MOBILITY • MACHINE LEARNING
+                </div>
 
-                {% for model in models %}
-                    <option value="{{ model }}">
-                        {{ model }}
-                    </option>
-                {% endfor %}
+                <h1>
+                    Predict Your
+                    <span>EV Range</span>
+                </h1>
 
-            </select>
+                <p class="description">
+                    Estimate the electric driving range of your vehicle
+                    using a machine learning prediction model.
+                </p>
 
+                <div class="features">
 
-            <!-- Electric Vehicle Type -->
-            <label>Electric Vehicle Type</label>
+                    <div class="feature">
+                        <div class="feature-icon">🔋</div>
+                        <div>
+                            <strong>Smart Prediction</strong>
+                            <small>ML-based range estimation</small>
+                        </div>
+                    </div>
 
-            <select name="vehicle_type" required>
+                    <div class="feature">
+                        <div class="feature-icon">🚗</div>
+                        <div>
+                            <strong>Vehicle Analysis</strong>
+                            <small>Based on your EV details</small>
+                        </div>
+                    </div>
 
-                <option value="">
-                    Select vehicle type
-                </option>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <div>
+                            <strong>Instant Result</strong>
+                            <small>Get your predicted range</small>
+                        </div>
+                    </div>
 
-                <option value="Battery Electric Vehicle (BEV)">
-                    Battery Electric Vehicle (BEV)
-                </option>
+                </div>
 
-                <option value="Plug-in Hybrid Electric Vehicle (PHEV)">
-                    Plug-in Hybrid Electric Vehicle (PHEV)
-                </option>
-
-            </select>
-
-
-            <!-- CAFV Eligibility -->
-            <label>CAFV Eligibility</label>
-
-            <select name="cafv" required>
-
-                <option value="">
-                    Select eligibility
-                </option>
-
-                <option value="Clean Alternative Fuel Vehicle Eligible">
-                    Clean Alternative Fuel Vehicle Eligible
-                </option>
-
-                <option value="Eligibility unknown as battery range has not been researched">
-                    Eligibility Unknown
-                </option>
-
-                <option value="Not eligible due to low battery range">
-                    Not Eligible
-                </option>
-
-            </select>
+            </section>
 
 
-            <!-- Base MSRP -->
-            <label>Base MSRP ($)</label>
+            <!-- Prediction Card -->
+            <section class="prediction-card">
 
-            <input
-                type="number"
-                name="base_msrp"
-                placeholder="Example: 45000"
-                min="0"
-                required
-            >
+                <div class="card-header">
+
+                    <div>
+                        <p class="card-label">VEHICLE DETAILS</p>
+
+                        <h2>Enter EV Information</h2>
+                    </div>
+
+                    <div class="card-icon">
+                        ⚡
+                    </div>
+
+                </div>
 
 
-            <!-- Predict Button -->
-            <button type="submit">
-                Predict Electric Range
-            </button>
+                <form action="/predict" method="POST">
 
-        </form>
+                    <div class="form-grid">
+
+                        <!-- Model Year -->
+                        <div class="input-group">
+
+                            <label for="model_year">
+                                Model Year
+                            </label>
+
+                            <input
+                                id="model_year"
+                                type="number"
+                                name="model_year"
+                                placeholder="e.g. 2022"
+                                min="1990"
+                                max="2030"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Make -->
+                        <div class="input-group">
+
+                            <label for="make">
+                                Vehicle Make
+                            </label>
+
+                            <select id="make" name="make" required>
+
+                                <option value="">
+                                    Select make
+                                </option>
+
+                                {% for make in makes %}
+                                    <option value="{{ make }}">
+                                        {{ make }}
+                                    </option>
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Vehicle Model -->
+                        <div class="input-group full-width">
+
+                            <label for="vehicle_model">
+                                Vehicle Model
+                            </label>
+
+                            <select
+                                id="vehicle_model"
+                                name="vehicle_model"
+                                required
+                            >
+
+                                <option value="">
+                                    Select vehicle model
+                                </option>
+
+                                {% for model in models %}
+                                    <option value="{{ model }}">
+                                        {{ model }}
+                                    </option>
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Vehicle Type -->
+                        <div class="input-group">
+
+                            <label for="vehicle_type">
+                                EV Type
+                            </label>
+
+                            <select
+                                id="vehicle_type"
+                                name="vehicle_type"
+                                required
+                            >
+
+                                <option value="">
+                                    Select type
+                                </option>
+
+                                <option value="Battery Electric Vehicle (BEV)">
+                                    Battery Electric Vehicle (BEV)
+                                </option>
+
+                                <option value="Plug-in Hybrid Electric Vehicle (PHEV)">
+                                    Plug-in Hybrid Electric Vehicle (PHEV)
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- CAFV -->
+                        <div class="input-group">
+
+                            <label for="cafv">
+                                CAFV Eligibility
+                            </label>
+
+                            <select
+                                id="cafv"
+                                name="cafv"
+                                required
+                            >
+
+                                <option value="">
+                                    Select eligibility
+                                </option>
+
+                                <option value="Clean Alternative Fuel Vehicle Eligible">
+                                    Eligible
+                                </option>
+
+                                <option value="Eligibility unknown as battery range has not been researched">
+                                    Unknown
+                                </option>
+
+                                <option value="Not eligible due to low battery range">
+                                    Not Eligible
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- MSRP -->
+                        <div class="input-group full-width">
+
+                            <label for="base_msrp">
+                                Base MSRP ($)
+                            </label>
+
+                            <div class="price-input">
+
+                                <span>$</span>
+
+                                <input
+                                    id="base_msrp"
+                                    type="number"
+                                    name="base_msrp"
+                                    placeholder="e.g. 45000"
+                                    min="0"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Button -->
+                    <button type="submit" class="predict-btn">
+
+                        <span>Predict Electric Range</span>
+
+                        <span class="arrow">→</span>
+
+                    </button>
+
+                </form>
+
+
+                <div class="card-footer">
+                    🔒 Your vehicle information is used only for prediction.
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- Footer -->
+        <footer>
+
+            <span>EV Range Prediction</span>
+
+            <span>•</span>
+
+            <span>Powered by Machine Learning</span>
+
+        </footer>
 
     </div>
 
 </body>
+
 </html>
