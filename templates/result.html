@@ -1,105 +1,222 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Prediction Result</title>
+```
+<title>EV Prediction Result</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+```
+
 </head>
 
 <body>
 
-    <div class="container result-container">
+```
+<div class="glow glow-one"></div>
+<div class="glow glow-two"></div>
 
-        <h1>Prediction Result</h1>
+<div class="page">
 
-        <!-- Prediction Result -->
-        <div class="result-box">
+    <!-- Header -->
+    <header class="header">
 
-            <h2>Estimated Electric Range</h2>
+        <div class="logo">
+            <span class="logo-icon">⚡</span>
+            <span>EV<span class="logo-green">Range</span></span>
+        </div>
 
-            <div class="range">
-                {{ prediction }} km
+        <div class="header-badge">
+            <span class="status-dot"></span>
+            Prediction Complete
+        </div>
+
+    </header>
+
+
+    <!-- Result Section -->
+    <main class="result-page">
+
+        <div class="result-title">
+
+            <div class="small-title">
+                ⚡ MACHINE LEARNING PREDICTION
             </div>
 
+            <h1>
+                Your EV Range
+                <span>Prediction</span>
+            </h1>
+
             <p>
-                Your EV's predicted electric range is
-                <strong>{{ prediction }} km</strong>.
+                Based on the vehicle information you provided,
+                our machine learning model estimated the following range.
             </p>
 
         </div>
 
 
-        <!-- Vehicle Details -->
-        <div class="vehicle-details">
+        <!-- Main Prediction -->
+        <section class="result-card">
 
-            <h2>Vehicle Details</h2>
+            <div class="result-icon">
+                ⚡
+            </div>
 
-            <p>
-                <strong>Model Year:</strong>
-                {{ model_year }}
+            <p class="result-label">
+                ESTIMATED ELECTRIC RANGE
             </p>
 
-            <p>
-                <strong>Make:</strong>
-                {{ make }}
+            <div class="range">
+                {{ prediction }}
+                <span>km</span>
+            </div>
+
+            <p class="result-description">
+                Your EV is estimated to travel approximately
+                <strong>{{ prediction }} km</strong>
+                on its electric range.
             </p>
 
-            <p>
-                <strong>Vehicle Model:</strong>
-                {{ vehicle_model }}
-            </p>
+        </section>
 
-            <p>
-                <strong>EV Type:</strong>
-                {{ vehicle_type }}
-            </p>
 
-            <p>
-                <strong>CAFV Eligibility:</strong>
-                {{ cafv }}
-            </p>
+        <!-- Vehicle Information -->
+        <section class="details-card">
 
-            <p>
-                <strong>Base MSRP:</strong>
-                ${{ base_msrp }}
-            </p>
+            <div class="section-heading">
 
-        </div>
+                <div>
+                    <p class="card-label">
+                        VEHICLE INFORMATION
+                    </p>
+
+                    <h2>Selected Vehicle</h2>
+                </div>
+
+                <div class="mini-icon">
+                    🚗
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+                    <span>Model Year</span>
+                    <strong>{{ model_year }}</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Make</span>
+                    <strong>{{ make }}</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Vehicle Model</span>
+                    <strong>{{ vehicle_model }}</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>EV Type</span>
+                    <strong>{{ vehicle_type }}</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>CAFV Eligibility</span>
+                    <strong>{{ cafv }}</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Base MSRP</span>
+                    <strong>${{ base_msrp }}</strong>
+                </div>
+
+            </div>
+
+        </section>
 
 
         <!-- Model Performance -->
-        <div class="performance-box">
+        <section class="performance-card">
 
-            <h2>Model Performance</h2>
+            <div class="section-heading">
 
-            <div class="performance-item">
-                <span>MAE</span>
-                <strong>0.61 km</strong>
+                <div>
+                    <p class="card-label">
+                        MODEL PERFORMANCE
+                    </p>
+
+                    <h2>XGBoost Regression Model</h2>
+                </div>
+
+                <div class="mini-icon">
+                    📊
+                </div>
+
             </div>
 
-            <div class="performance-item">
-                <span>RMSE</span>
-                <strong>4.07 km</strong>
+
+            <div class="performance-grid">
+
+                <div class="metric">
+                    <span>MAE</span>
+                    <strong>0.61</strong>
+                    <small>km</small>
+                </div>
+
+                <div class="metric">
+                    <span>RMSE</span>
+                    <strong>4.07</strong>
+                    <small>km</small>
+                </div>
+
+                <div class="metric highlight">
+                    <span>R² SCORE</span>
+                    <strong>0.9979</strong>
+                    <small>Accuracy indicator</small>
+                </div>
+
             </div>
 
-            <div class="performance-item">
-                <span>R² Score</span>
-                <strong>0.9979</strong>
-            </div>
+        </section>
+
+
+        <!-- Buttons -->
+        <div class="result-actions">
+
+            <a href="/" class="predict-again">
+                <span>⚡</span>
+                Predict Another Vehicle
+            </a>
 
         </div>
 
+    </main>
 
-        <!-- Back Button -->
-        <a href="/" class="back-button">
-            Predict Again
-        </a>
 
-    </div>
+    <footer>
+
+        <span>EV Range Prediction</span>
+        <span>•</span>
+        <span>Powered by Machine Learning</span>
+
+    </footer>
+
+</div>
+```
 
 </body>
 </html>
